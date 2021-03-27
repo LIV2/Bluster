@@ -3,7 +3,12 @@ This is a replacement for the Buster IC used in the Amiga 2000
 
 ![PCB](Docs/PCB.png?raw=True)
 
-### Bill of materials
+## Programming the CPLD
+
+Instructions can be found [Here](Programming.md)
+
+## Bill of materials
+
 |Component|Location|QTY|Link|
 |---------|--------|---|------|
 |XC9572XL-10VQ64C|U1|1|[Mouser](https://www.mouser.se/ProductDetail/217-C9572XL-10VQG64C)|
