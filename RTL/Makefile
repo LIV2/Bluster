@@ -38,5 +38,8 @@ flash:	$(PROJECT).jed
 	"setCable -p $(CABLE)\n"\
 	"identify\n"\
 	"assignfile -p 1 -file $<\n"\
+	"erase -p 1\n"\
 	"program -p 1\n"\
-	"verify -p 1" | LD_PRELOAD=/opt/Xilinx/usb-driver/libusb-driver.so impact -batch
+	"verify -p 1\n"\
+	"exit" > batch
+	LD_PRELOAD=/opt/Xilinx/usb-driver/libusb-driver.so impact -batch batch
