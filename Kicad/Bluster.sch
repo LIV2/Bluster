@@ -407,96 +407,96 @@ Connection ~ 9150 1390
 $Comp
 L power:+5V #PWR02
 U 1 1 601644A8
-P 1550 2800
-F 0 "#PWR02" H 1550 2650 50  0001 C CNN
-F 1 "+5V" H 1565 2973 50  0000 C CNN
-F 2 "" H 1550 2800 50  0001 C CNN
-F 3 "" H 1550 2800 50  0001 C CNN
-	1    1550 2800
+P 1450 2800
+F 0 "#PWR02" H 1450 2650 50  0001 C CNN
+F 1 "+5V" H 1465 2973 50  0000 C CNN
+F 2 "" H 1450 2800 50  0001 C CNN
+F 3 "" H 1450 2800 50  0001 C CNN
+	1    1450 2800
 	1    0    0    -1  
 $EndComp
-Text Label 4800 2950 2    50   ~ 0
-~BG1
-Text Label 4800 3050 2    50   ~ 0
-~BG2
-Text Label 4800 3150 2    50   ~ 0
-~BG3
 Text Label 4800 3250 2    50   ~ 0
-~BG4
+~BG1
 Text Label 4800 3350 2    50   ~ 0
-~BG5
+~BG2
 Text Label 4800 3450 2    50   ~ 0
-~BR1
+~BG3
 Text Label 4800 1550 2    50   ~ 0
-~BR2
+~BG4
 Text Label 4800 1650 2    50   ~ 0
-~BR3
+~BG5
 Text Label 4800 1750 2    50   ~ 0
-~BR4
+~BR1
 Text Label 4800 1850 2    50   ~ 0
-~BR5
+~BR2
 Text Label 4800 1950 2    50   ~ 0
-~SLAVE1
+~BR3
 Text Label 4800 2050 2    50   ~ 0
-~SLAVE2
+~BR4
 Text Label 4800 2150 2    50   ~ 0
-~SLAVE3
+~BR5
 Text Label 4800 2250 2    50   ~ 0
-~SLAVE4
+~SLAVE1
 Text Label 4800 2350 2    50   ~ 0
-~SLAVE5
+~SLAVE2
 Text Label 4800 2450 2    50   ~ 0
-~BG
+~SLAVE3
 Text Label 4800 2550 2    50   ~ 0
-~CDAC
+~SLAVE4
 Text Label 4800 2650 2    50   ~ 0
-C1
+~SLAVE5
 Text Label 6400 1450 0    50   ~ 0
-C3
+~BG
 Text Label 4800 2750 2    50   ~ 0
-~C2
+~CDAC
 Text Label 6400 1550 0    50   ~ 0
-~C4
+C1
 Text Label 6400 1650 0    50   ~ 0
+C3
+Text Label 6400 1750 0    50   ~ 0
+~C2
+Text Label 6400 1850 0    50   ~ 0
+~C4
+Text Label 6400 1950 0    50   ~ 0
 GBG
-Text Label 4800 4150 2    50   ~ 0
-DOE
-Text Label 4800 4050 2    50   ~ 0
-~DBOE
-Text Label 4800 3950 2    50   ~ 0
-D2P
-Text Label 4800 3850 2    50   ~ 0
-~RST
 Text Label 4800 3750 2    50   ~ 0
-~OWN
+DOE
 Text Label 4800 3650 2    50   ~ 0
-~OVR
+~DBOE
 Text Label 4800 3550 2    50   ~ 0
-~BOSS
+D2P
 Text Label 6400 4050 0    50   ~ 0
-~UDS
+~RST
 Text Label 6400 3950 0    50   ~ 0
-~LDS
+~OWN
 Text Label 6400 3850 0    50   ~ 0
-~AS
+~OVR
 Text Label 6400 3750 0    50   ~ 0
-READ
+~BOSS
 Text Label 6400 3650 0    50   ~ 0
-~A23
+~UDS
 Text Label 6400 3550 0    50   ~ 0
-~A22
+~LDS
 Text Label 6400 3450 0    50   ~ 0
-~A21
+~AS
 Text Label 6400 3350 0    50   ~ 0
-~A20
+READ
 Text Label 6400 3250 0    50   ~ 0
-~A19
+~A23
 Text Label 6400 3150 0    50   ~ 0
-~CBG
+~A22
 Text Label 6400 3050 0    50   ~ 0
-~CBR
+~A21
 Text Label 6400 2950 0    50   ~ 0
-~BR
+~A20
 Text Label 6400 2750 0    50   ~ 0
+~A19
+Text Label 6400 2650 0    50   ~ 0
+~CBG
+Text Label 6400 2550 0    50   ~ 0
+~CBR
+Text Label 6400 2450 0    50   ~ 0
+~BR
+Text Label 6400 2350 0    50   ~ 0
 ~BEER
 $EndSCHEMATC

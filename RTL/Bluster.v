@@ -22,7 +22,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 //`define badbuster // Emulate 1st rev of Buster that had a bug requiring buster tower
 
-module Buster(
+module Bluster(
   input [5:1] BR,
   input [5:1] SLV,
   input [23:19] ADDR,
