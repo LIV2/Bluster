@@ -6,7 +6,7 @@ Programming the CPLD from a Raspberry Pi is easy thanks to a tool called xc3spro
 
 ```shell
 # Add Repo
-curl https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
+curl -L https://apt.matrix.one/doc/apt-key.gpg | sudo apt-key add -
 echo "deb https://apt.matrix.one/raspbian $(lsb_release -sc) main" | sudo tee /etc/apt/sources.list.d/matrixlabs.list
 
 # Install
