@@ -4,11 +4,11 @@ WORKDIR=tmp
 
 CABLE=usb21
 
-CPLDFITFLAGS=-loc on -slew fast -init low -terminate keeper -nogclkopt -nogtsopt -nogsropt -power std -ignoretspec -optimize speed -keepio -inputs 54 -pterms 25
+CPLDFITFLAGS=-loc on -slew slow -init low -terminate keeper -nogclkopt -nogtsopt -nogsropt -power std -ignoretspec -optimize speed -keepio -inputs 54 -pterms 25
 
-.PHONY:	all clean
+.PHONY:	all clean timing
 
-all:	$(PROJECT)_rev_a.jed $(PROJECT)_rev_b.jed
+all:	$(PROJECT)_rev_a.jed $(PROJECT)_rev_b.jed $(WORKDIR)/$(PROJECT)_rev_b.tim
 
 $(PROJECT).prj:
 	@echo verilog work $(PROJECT).v > $@
@@ -29,6 +29,9 @@ $(WORKDIR)/$(PROJECT)_rev_b.ngc:	$(PROJECT).v $(PROJECT).prj
 $(WORKDIR)/$(PROJECT)_rev_b.ngd:	$(WORKDIR)/$(PROJECT)_rev_b.ngc $(PROJECT)_rev_b.ucf
 	cd $(WORKDIR) && ngdbuild -p $(PART) -uc ../$(PROJECT)_rev_b.ucf ../$< ../$@
 
+$(WORKDIR)/%.tim:	$(WORKDIR)/%.vm6
+	cd $(WORKDIR) && taengine -l ../$@ -f $(PROJECT)_rev_b
+
 $(WORKDIR)/%.vm6:	$(WORKDIR)/%.ngd %.ucf
 	cd $(WORKDIR) && cpldfit $(CPLDFITFLAGS) -p $(PART) ../$<
 
@@ -36,12 +39,14 @@ $(WORKDIR)/%.vm6:	$(WORKDIR)/%.ngd %.ucf
 	hprep6 -i $<
 	cp $@ ../Binary/
 
+timing:	$(WORKDIR)/$(PROJECT)_rev_a.tim $(WORKDIR)/$(PROJECT)_rev_b.tim
+
 clean:
 	rm -rvf tmp
 	rm *.jed
 	rm *.prj
 
-flash:	$(PROJECT).jed
+flash:	$(PROJECT)_rev_a.jed
 	@echo "setMode -bs\n"\
 	"setCable -p $(CABLE)\n"\
 	"identify\n"\
