@@ -86,25 +86,32 @@ assign BEERn = (!nocollision & RESETn) ? 1'b0 : 1'bZ;
 
 /// Steering
 
+
+// Dirty hack
+// Add a delay to ASn so that DBOE/DOE are held a little longer into S7
+(*KEEP = "true" *) BUF ASn_buf1 (.I(ASn),.O(DASn));
+
 // Delayed ASn needed for buffer control and DOE
 // Based on the circuitry of the German A2000
-// Not really sure why it uses C2? Perhaps they were worried about metastability
+// ASn/DOE/DBOE Delayed until we're in the correct phase with the custom chips
 
 reg ASnd1; // ASn delayed until C2
 reg ASnd2; // ASnd1 delayed until C7M
 
-always @(negedge C2n or posedge ASn)
+
+//always @(negedge C2n or posedge ASn)
+always @(negedge C2n or posedge DASn)
 begin
-  if (ASn) begin
+  if (DASn) begin
     ASnd1 <= 1;
   end else begin
     ASnd1 <= ASn;
   end
 end
 
-always @(posedge C7M or posedge ASn)
+always @(posedge C7M or posedge DASn)
 begin
-  if (ASn) begin
+  if (DASn) begin
     ASnd2 <= 1;
   end else begin
     ASnd2 <= ASnd1;
@@ -132,7 +139,7 @@ assign DBOEn = !(
   (!UDSn|!LDSn) & READ & !ASnd2 & BEERn & !OWNn & SLV[1] & SLV[2] & SLV[3] & SLV[4] & SLV[5]  // Zorro DMA from mainboard
 */
   // Observed behavior on Rev 4.4 B2000
-  !ASn & !READ & BEERn
+  !DASn & !READ & BEERn
   | (!UDSn|!LDSn) & READ & !ASnd2 & BEERn   
 );
 

@@ -6,3 +6,4 @@ tmp/
 local.mk
 *.lso
 *.prj
+*.tim
