@@ -7,6 +7,13 @@ This is a replacement for the Buster IC used in the Amiga 2000
 
 Instructions can be found [Here](Programming.md)
 
+## Revision History
+So far there are no functional differences across the various revisions, just rerouting to look prettier
+ 
+* Rev A: Initial Revision
+* Rev B: Design into smaller PCB
+* Rev C: Tweak PCB design, change LDO to more standard LM1117 type
+
 ## Bill of materials
 
 |Component|Location|QTY|Link|
