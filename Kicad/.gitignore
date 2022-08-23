@@ -10,6 +10,7 @@
 *.kicad_prl
 *.sch-bak
 *~
+*-backups
 _autosave-*
 *.tmp
 *-save.pro

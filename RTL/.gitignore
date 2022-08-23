@@ -7,3 +7,4 @@ local.mk
 *.lso
 *.prj
 *.tim
+batch

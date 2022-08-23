@@ -1,3 +1,3 @@
 (sym_lib_table
-  (lib (name Buster)(type Legacy)(uri ${KIPRJMOD}/Buster.lib)(options "")(descr ""))
+  (lib (name "Buster")(type "KiCad")(uri "${KIPRJMOD}/Buster.kicad_sym")(options "")(descr ""))
 )
