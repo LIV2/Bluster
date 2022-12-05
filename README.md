@@ -4,8 +4,13 @@ This is a replacement for the Buster IC used in the Amiga 2000
 ![PCB](Docs/PCB.png?raw=True)
 
 ## Programming the CPLD
+Download the firmware corresponding to your board revision (right-click -> save as):
 
-Instructions can be found [Here](Programming.md)
+* [Rev A](https://github.com/LIV2/Bluster/raw/master/Binary/Bluster_rev_a.jed)
+* [Rev B](https://github.com/LIV2/Bluster/raw/master/Binary/Bluster_rev_b.jed)
+* [Rev C](https://github.com/LIV2/Bluster/raw/master/Binary/Bluster_rev_c.jed)
+
+And follow the instructions found [Here](Programming.md)
 
 ## Revision History
 So far there are no functional differences across the various revisions, just rerouting to look prettier
