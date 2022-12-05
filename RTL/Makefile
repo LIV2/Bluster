@@ -34,7 +34,7 @@ $(WORKDIR)/$(PROJECT)_rev_c.ngc:	$(PROJECT).v $(PROJECT).prj
 	@sed -r "s#^(-top).*#\1 $(PROJECT)#g;s#^(-ofn).*#\1 ..\/$@#g;s#^(-ifn).*#\1 ../$(PROJECT).prj#g;s#^(-define).*#\1 {$(REV_C_DEFINES)}#g" template.xst > $@.xst
 	cd $(WORKDIR) && xst -ifn ../$@.xst -ofn $(PROJECT)-xst.log
 
-$(WORKDIR)/$(PROJECT)_rev_c.ngd:	$(WORKDIR)/$(PROJECT)_rev_c.ngc $(PROJECT)_rev_b.ucf
+$(WORKDIR)/$(PROJECT)_rev_c.ngd:	$(WORKDIR)/$(PROJECT)_rev_c.ngc $(PROJECT)_rev_c.ucf
 	cd $(WORKDIR) && ngdbuild -p $(PART) -uc ../$(PROJECT)_rev_c.ucf ../$< ../$@
 
 $(WORKDIR)/%.tim:	$(WORKDIR)/%.vm6
