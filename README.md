@@ -13,7 +13,7 @@ Download the firmware corresponding to your board revision (right-click -> save 
 And follow the instructions found [Here](Programming.md)
 
 ## Revision History
-So far there are no functional differences across the various revisions, just rerouting to look prettier
+So far there are no functional differences across the various revisions, just rerouting, pin swapping and part changes
  
 * Rev A: Initial Revision
 * Rev B: Design into smaller PCB
