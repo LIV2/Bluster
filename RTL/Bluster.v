@@ -146,15 +146,22 @@ assign DBOEn = !(
 
 
 // Arbitration
-// Here be dragons
-//
-// I am not 100% sure about the coprocessor logic here and have no good way of testing it.
 
 reg BGOLDn;
 reg COPBG;
 wire BGRANT;
 
-// If BOSS asserted, switch the direction of CBG and CBR 
+// If BOSS asserted, switch the direction of CBG and CBR
+//
+// When BOSSn is not true (68K owns the bus)
+//   CBR is an input  - Coprocessor signals it's bus request to Buster
+//   CBG is an output - Buster signals the bus grant back to the Coprocessor
+//
+// When BOSSn is true (Copro has taken over)
+//   CBR is an output - Bus requests are sent to the Coprocessor
+//   CBG is an input  - Coprocessor signals the bus grant to Buster
+//
+//
 assign CBGn = (BOSSn) ? COPBG : 1'bZ;
 assign CBRn = (!BOSSn) ? BRn  : 1'bZ;
 
