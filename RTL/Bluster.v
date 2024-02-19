@@ -73,8 +73,8 @@ wire mainboard;
 // Reserved address ranges
 // Buster triggers a bus error if a PIC answers to these addresses (unless it asserts OVR)
 assign mainboard = (
-  ADDR[23:21] == 3'b000   |  // $000000-0FFFFF - Chip RAM
-  ADDR[23:21] == 3'b101   |  // $A00000-BFFFFF - RESERVED
+  ADDR[23:21] == 3'b000   |  // $000000-1FFFFF - Chip RAM
+  ADDR[23:19] == 5'b10111 |  // $B80000-BFFFFF - RESERVED
   ADDR[23:21] == 3'b110   |  // $C00000-DFFFFF - Pseudo-Fast RAM
   ADDR[23:19] == 5'b11100 |  // $E00000-E7FFFF - RESERVED
   ADDR[23:19] == 5'b11111    // $F80000-FFFFFF - Kickstart ROM
