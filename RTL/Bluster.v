@@ -66,13 +66,9 @@ begin
   C4n <= !C3;
 end
 
-// Collision
-wire nocollision;
-wire mainboard;
-
 // Reserved address ranges
 // Buster triggers a bus error if a PIC answers to these addresses (unless it asserts OVR)
-assign mainboard = (
+wire mainboard = (
   ADDR[23:21] == 3'b000   |  // $000000-1FFFFF - Chip RAM
   ADDR[23:19] == 5'b10111 |  // $B80000-BFFFFF - RESERVED
   ADDR[23:21] == 3'b110   |  // $C00000-DFFFFF - Pseudo-Fast RAM
@@ -81,8 +77,11 @@ assign mainboard = (
   ) & !ASn & RESETn & OVRn;
 
 // If more than one PIC answers at the same time throw a bus error.
-assign nocollision = (!SLV[5] ^ !SLV[4] ^ !SLV[3] ^ !SLV[2] ^ !SLV[1] ^ mainboard) | (SLV[5] & SLV[4] & SLV[3] & SLV[2] & SLV[1] & !mainboard);
-assign BEERn = (!nocollision & RESETn) ? 1'b0 : 1'bZ;
+// Uses the "zeroOrOneHot" equation from https://stackoverflow.com/a/11235598
+wire collision_vector = {!SLV[5], !SLV[4], !SLV[3], !SLV[2], !SLV[1], mainboard};
+wire collision        = |(collision_vector & (collision_vector - 1));
+
+assign BEERn = (collision & RESETn) ? 1'b0 : 1'bZ;
 
 /// Steering
 
