@@ -37,8 +37,16 @@ $(WORKDIR)/$(PROJECT)_rev_c.ngc:	$(PROJECT).v $(PROJECT).prj
 $(WORKDIR)/$(PROJECT)_rev_c.ngd:	$(WORKDIR)/$(PROJECT)_rev_c.ngc $(PROJECT)_rev_c.ucf
 	cd $(WORKDIR) && ngdbuild -p $(PART) -uc ../$(PROJECT)_rev_c.ucf ../$< ../$@
 
+$(WORKDIR)/$(PROJECT)_diego.ngc:	$(PROJECT).v $(PROJECT).prj
+	@mkdir $(WORKDIR) || true
+	@sed -r "s#^(-top).*#\1 $(PROJECT)#g;s#^(-ofn).*#\1 ..\/$@#g;s#^(-ifn).*#\1 ../$(PROJECT).prj#g;s#^(-define).*#\1 {DIEGO=1}#g" template.xst > $@.xst
+	cd $(WORKDIR) && xst -ifn ../$@.xst -ofn $(PROJECT)-xst.log
+
+$(WORKDIR)/$(PROJECT)_diego.ngd:	$(WORKDIR)/$(PROJECT)_diego.ngc $(PROJECT)_diego.ucf
+	cd $(WORKDIR) && ngdbuild -p $(PART) -uc ../$(PROJECT)_diego.ucf ../$< ../$@
+
 $(WORKDIR)/%.tim:	$(WORKDIR)/%.vm6
-	cd $(WORKDIR) && taengine -l ../$@ -f $(PROJECT)_rev_b
+	cd $(WORKDIR) && taengine -l ../$@ -f $(PROJECT)_diego.vm6
 
 $(WORKDIR)/%.vm6:	$(WORKDIR)/%.ngd %.ucf
 	cd $(WORKDIR) && cpldfit $(CPLDFITFLAGS) -p $(PART) ../$<

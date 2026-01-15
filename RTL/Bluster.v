@@ -41,20 +41,27 @@ module Bluster(
   inout BEERn,
   inout CBRn,
   inout CBGn,
+`ifdef DIEGO
+  output C7M,
+`endif
   output DOE,
   output DBOEn,
   output D2Pn,
   output GBGn,
-  output reg BRn,
+  output BRn,
   output reg [5:1] BG,
   output reg C4n,
   output reg C2n
   );
 
 // Clocks
+`ifndef DIEGO
 wire C7M;
+`endif
 
 assign C7M = !(C1 ^ C3);
+
+`ifndef DIEGO
 
 always @(posedge CDACn)
 begin
@@ -65,6 +72,21 @@ always @(negedge CDACn)
 begin
   C4n <= !C3;
 end
+
+`else
+// Diego clock inputs are actually C1n,C3n,CDAC
+
+always @(negedge CDACn)
+begin
+  C2n <= C1;
+end
+
+always @(posedge CDACn)
+begin
+  C4n <= C3;
+end
+
+`endif
 
 // Collision
 wire nocollision;
@@ -168,6 +190,13 @@ assign CBRn = (!BOSSn) ? BRn  : 1'bZ;
 assign BGRANT = (BOSSn) ? BGn : CBGn;
 assign GBGn   = (BOSSn) ? BGn : CBGn;
 
+reg req_n;
+
+`ifdef DIEGO
+assign BRn = (BOSSn) ? req_n : 1'b0;
+`else
+assign BRn = req_n;
+`endif
 
 always @(posedge C7M)
 begin
@@ -182,6 +211,6 @@ begin
   BG[4] = !(( RESETn & !BGRANT & BGOLDn & (CBRn | !BOSSn) & BR[1] & BR[2] & BR[3] & !BR[4] ) | (RESETn & !BGRANT & !BG[4]));
   BG[5] = !(( RESETn & !BGRANT & BGOLDn & (CBRn | !BOSSn) & BR[1] & BR[2] & BR[3] & BR[4] & !BR[5] ) | (RESETn & !BGRANT & !BG[5]));
  
-  BRn <= (!RESETn | ((CBRn | !BOSSn) & BR[1] & BR[2] & BR[3] & BR[4] & BR[5]));
+  req_n <= (!RESETn | ((CBRn | !BOSSn) & BR[1] & BR[2] & BR[3] & BR[4] & BR[5]));
 end
 endmodule
