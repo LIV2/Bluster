@@ -184,13 +184,14 @@ wire BGRANT;
 //   CBG is an input  - Coprocessor signals the bus grant to Buster
 //
 //
+reg req_n;
+
 assign CBGn = (BOSSn) ? COPBG : 1'bZ;
-assign CBRn = (!BOSSn) ? BRn  : 1'bZ;
+assign CBRn = (!BOSSn) ? req_n : 1'bZ;
 
 assign BGRANT = (BOSSn) ? BGn : CBGn;
 assign GBGn   = (BOSSn) ? BGn : CBGn;
 
-reg req_n;
 
 `ifdef DIEGO
 assign BRn = (BOSSn) ? req_n : 1'b0;
@@ -204,7 +205,7 @@ begin
   
   // Generate requests & hold grants
   // Coprocessor has highest priority
-  COPBG = !(( RESETn & !BGRANT & BGOLDn & BOSSn & !CBRn ) | (RESETn & !BGn & !COPBG));
+  COPBG = !(( RESETn & !BGRANT & BGOLDn & BOSSn & !CBRn ) | (RESETn & !COPBG));
   BG[1] = !(( RESETn & !BGRANT & BGOLDn & (CBRn | !BOSSn) & !BR[1] ) | (RESETn & !BGRANT & !BG[1]));
   BG[2] = !(( RESETn & !BGRANT & BGOLDn & (CBRn | !BOSSn) & BR[1] & !BR[2] ) | (RESETn & !BGRANT & !BG[2]));
   BG[3] = !(( RESETn & !BGRANT & BGOLDn & (CBRn | !BOSSn) & BR[1] & BR[2] & !BR[3] ) | (RESETn & !BGRANT & !BG[3]));
